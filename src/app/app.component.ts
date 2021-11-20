@@ -9,11 +9,13 @@ import firebase from 'firebase/compat/app';
 })
 export class AppComponent {
   title = 'mastergym';
-  constructor(public auth: AngularFireAuth){
+  constructor(public auth: AngularFireAuth)
+  {
+    
   }
   
   login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.auth.signInWithEmailAndPassword('celestino97@gmail.com', '123456');
   }
   logout() {
     this.auth.signOut();
