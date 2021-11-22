@@ -9,11 +9,17 @@ import firebase from 'firebase/compat/app';
 })
 export class AppComponent {
   title = 'mastergym';
-  constructor(public auth: AngularFireAuth)
-  {
-    
+  usuario: any;
+  cargando: boolean = true;
+  constructor(private auth: AngularFireAuth) {
+    this.auth.user.subscribe((user) => {
+      setTimeout(() => {
+        this.cargando = false;
+        this.usuario = user;
+      }, 2000);
+    });
   }
-  
+
   login() {
     this.auth.signInWithEmailAndPassword('celestino97@gmail.com', '123456');
   }
