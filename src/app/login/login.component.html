@@ -1,20 +1,41 @@
 <div class="container">
+
+  <div class="text-center">
+    <img class="img-fluid" src="assets/star_wars_2.jpg" alt="">
+    <h3>Bienvenido, por favor ingrese sus datos</h3>
+  </div>
+
+  <form [formGroup]="formularioLogin">
     
-    <div class="text-center">
-        <img class="img-fluid" src="assets/star_wars_2.jpg" alt="">
-        <h3>Bienvenido, por favor ingrese sus datos</h3>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
+        placeholder="Ingrese su correo electronico" aria-describedby="emailHelp">
+      <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+      <div *ngIf="formularioLogin.controls['email'].invalid && formularioLogin.controls['email'].dirty"
+        class="alert alert-danger" role="alert">
+        <span *ngIf="formularioLogin.controls['email'].errors?.required">Correo requerido</span>
+        <span *ngIf="formularioLogin.controls['email'].errors?.email">Correo no valido</span>
+      </div>
     </div>
 
-    <form [formGroup]="formularioLogin">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" placeholder="Ingrese su correo electronico" aria-describedby="emailHelp">
-          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-          <input type="password" placeholder="Ingrese su contraseña" formControlName="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button [disabled]="!formularioLogin.valid" (click)="ingresar()" type="submit" class="btn btn-primary">Ingresar</button>
-      </form>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+      <input type="password" (keyup.enter)="ingresar()" placeholder="Ingrese su contraseña" formControlName="password"
+        class="form-control" id="exampleInputPassword1">
+      <div *ngIf="formularioLogin.controls['password']. invalid && formularioLogin.controls['password'].dirty"
+        class="alert alert-danger" role="alert">
+        <span *ngIf="formularioLogin.controls['password'].errors?.required">Contraseña requerida</span>
+      </div>
+    </div>
+
+    <button [disabled]="!formularioLogin.valid" (click)="ingresar()" type="submit"
+      class="btn btn-primary">Ingresar</button>
+  </form>
+
+  <div *ngIf="!datosCorrectos" class="alert alert-warning alert-dismissible" role="alert">
+    {{textoError}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
 </div>
