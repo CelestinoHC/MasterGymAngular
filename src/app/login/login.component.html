@@ -6,7 +6,7 @@
   </div>
 
   <form [formGroup]="formularioLogin">
-    
+
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
       <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
@@ -37,5 +37,9 @@
     {{textoError}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
+
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-pulse" [fullScreen]="true">
+    <p style="color: white"> Ingresando... </p>
+  </ngx-spinner>
 
 </div>
