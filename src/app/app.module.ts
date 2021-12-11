@@ -14,6 +14,8 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
+import { Firestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { ListadoClientesComponent } from './listado-clientes/listado-clientes.co
     NgxSpinnerModule
   ],
   providers: [
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFirestore
   ],
   bootstrap: [AppComponent]
 })

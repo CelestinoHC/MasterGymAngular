@@ -8,44 +8,11 @@
     </form>
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3" *ngFor="let cliente of clientes">
             <div class="card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="card-img-top img-cliente" alt="imagen de cliente">
+                <img [src]="cliente.imgPath" class="card-img-top img-cliente" alt="imagen de cliente">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Nombre</h5>
-                    <a href="#" class="card-link text-warning">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="card-img-top img-cliente" alt="imagen de cliente">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Nombre</h5>
-                    <a href="#" class="card-link text-warning">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="card-img-top img-cliente" alt="imagen de cliente">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Nombre</h5>
-                    <a href="#" class="card-link text-warning">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="card-img-top img-cliente" alt="imagen de cliente">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Nombre</h5>
+                    <h5 class="card-title">{{cliente.nombre}} {{cliente.apellido}}</h5>
                     <a href="#" class="card-link text-warning">Editar</a>
                     <a href="#" class="card-link text-danger">Desactivar</a>
                 </div>
