@@ -13,10 +13,8 @@ export class AppComponent {
   cargando: boolean = true;
   constructor(private auth: AngularFireAuth) {
     this.auth.user.subscribe((user) => {
-      setTimeout(() => {
-        this.cargando = false;
-        this.usuario = user;
-      }, 1000);
+      this.cargando = false;
+      this.usuario = user;
     });
   }
 
