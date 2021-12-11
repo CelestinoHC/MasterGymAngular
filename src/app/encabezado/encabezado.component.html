@@ -16,18 +16,18 @@
             <a class="nav-link" href="#">Link</a>
           </li> -->
           <li class="nav-item dropdown" dropdown>
-            <a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Clientes
             </a>
             <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="#">Agregar</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Ver Clientes</a></li>
+              <li><a class="dropdown-item" routerLink="listado-clientes">Ver Clientes</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown" dropdown>
-            <a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Precios
             </a>
             <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
@@ -42,7 +42,7 @@
           </li>
 
           <li class="nav-item dropdown" dropdown>
-            <a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Reportes
             </a>
             <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
@@ -61,4 +61,6 @@
         </form> -->
       </div>
     </div>
+
+    <button (click)="logout()" class="btn btn-danger">Salir</button>
   </nav>

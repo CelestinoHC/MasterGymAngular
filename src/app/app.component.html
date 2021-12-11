@@ -1,8 +1,8 @@
 <div *ngIf="usuario && !cargando; else showLogin">
   <app-encabezado></app-encabezado>
   <router-outlet></router-outlet>
-  <h1>Hello {{ usuario.email }}!</h1>
-  <button (click)="logout()">Logout</button>
+  <!-- <h1>Hello {{ usuario.email }}!</h1> -->
+  <!-- <button (click)="logout()">Logout</button> -->
 </div>
 
 <ng-template #showLogin>

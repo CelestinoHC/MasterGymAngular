@@ -18,10 +18,7 @@ export class AppComponent {
     });
   }
 
-  login() {
-    this.auth.signInWithEmailAndPassword('celestino97@gmail.com', '123456');
-  }
-  logout() {
-    this.auth.signOut();
-  }
+  // login() {
+  //   this.auth.signInWithEmailAndPassword('celestino97@gmail.com', '123456');
+  // }
 }
