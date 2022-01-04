@@ -15,14 +15,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     EncabezadoComponent,
-    ListadoClientesComponent
+    ListadoClientesComponent,
+    AgregarClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
     BrowserAnimationsModule,    
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+    ProgressbarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
     FormsModule,

@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <form action="">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Agregue el nombre">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Apellido</label>
+                    <input type="text" class="form-control" placeholder="Agregue el apellido">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Correo</label>
+                    <input type="text" class="form-control" placeholder="Agregue un correo">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Fecha de nacimiento</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Telefono</label>
+                    <input type="tel" class="form-control" placeholder="Agregue un telefono">
+                </div>
+            </div>
+
+            <div class="col-sm-12 mt-3">
+                <label for="formFile" class="form-label">Imagen</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+
+            <div class="col-sm-12">
+                <progressbar [value]="22" type="success" [striped]="true">22%</progressbar>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-3">Agregar</button>
+    </form>
+</div>
