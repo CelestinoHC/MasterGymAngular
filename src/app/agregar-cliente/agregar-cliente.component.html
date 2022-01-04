@@ -1,40 +1,66 @@
 <div class="container mt-5">
-    <form action="">
+    <form [formGroup]="formularioCliente" action="">
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Nombre</label>
-                    <input type="text" class="form-control" placeholder="Agregue el nombre">
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Agregue el nombre">
+                    <div *ngIf="formularioCliente.controls['nombre'].invalid && formularioCliente.controls['nombre'].dirty"
+                        class="alert alert-danger" role="alert">
+                        <span *ngIf="formularioCliente.controls['nombre'].errors?.required">Nombre requerido</span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Apellido</label>
-                    <input type="text" class="form-control" placeholder="Agregue el apellido">
+                    <input type="text" class="form-control" formControlName="apellido"
+                        placeholder="Agregue el apellido">
+                    <div *ngIf="formularioCliente.controls['apellido'].invalid && formularioCliente.controls['apellido'].dirty"
+                        class="alert alert-danger" role="alert">
+                        <span *ngIf="formularioCliente.controls['apellido'].errors?.required">Apellido requerido</span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Correo</label>
-                    <input type="text" class="form-control" placeholder="Agregue un correo">
+                    <input type="text" class="form-control" formControlName="correo" placeholder="Agregue un correo">
+                    <div *ngIf="formularioCliente.controls['correo'].invalid && formularioCliente.controls['correo'].dirty"
+                        class="alert alert-danger" role="alert">
+                        <span *ngIf="formularioCliente.controls['correo'].errors?.required">Correo requerido</span>
+                        <span *ngIf="formularioCliente.controls['correo'].errors?.email">Correo no valido</span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Fecha de nacimiento</label>
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" formControlName="fechaNacimiento">
+
+                    <div *ngIf="formularioCliente.controls['fechaNacimiento'].invalid && formularioCliente.controls['fechaNacimiento'].dirty"
+                        class="alert alert-danger" role="alert">
+                        <span *ngIf="formularioCliente.controls['fechaNacimiento'].errors?.required">Fecha de Nacimiento
+                            requerida</span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Telefono</label>
-                    <input type="tel" class="form-control" placeholder="Agregue un telefono">
+                    <input type="tel" class="form-control" formControlName="telefono" placeholder="Agregue un telefono">
                 </div>
             </div>
 
             <div class="col-sm-12 mt-3">
                 <label for="formFile" class="form-label">Imagen</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" formControlName="imgPath" id="formFile">
+
+                <div *ngIf="formularioCliente.controls['imgPath'].invalid && formularioCliente.controls['imgPath'].dirty"
+                    class="alert alert-danger" role="alert">
+                    <span *ngIf="formularioCliente.controls['imgPath'].errors?.required">Fecha de Nacimiento
+                        requerida</span>
+                </div>
             </div>
 
             <div class="col-sm-12">
@@ -42,6 +68,6 @@
             </div>
         </div>
 
-        <button class="btn btn-primary mt-3">Agregar</button>
+        <button class="btn btn-primary mt-3" [disabled]="!formularioCliente.valid" (click)="agregar()">Agregar</button>
     </form>
 </div>
