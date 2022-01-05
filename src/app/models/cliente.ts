@@ -9,6 +9,7 @@ export class Cliente {
     imgPath: string;
     telefono: number;
     ref: DocumentReference;
+    visible: boolean;
 
     constructor() {
 

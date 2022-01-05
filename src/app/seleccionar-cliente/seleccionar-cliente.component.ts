@@ -18,10 +18,22 @@ export class SeleccionarClienteComponent implements OnInit {
         let cliente: any = item.data();
         cliente.id = item.id;
         cliente.ref = item.ref;
+        cliente.visible = false;
 
         this.clientes.push(cliente);
       });
     });
+  }
+
+  buscarCliente(nombre: any){
+    this.clientes.forEach((cliente)=>{
+      if(cliente.nombre.toLowerCase().includes(nombre.target.value.toLowerCase()) || cliente.apellido.toLowerCase().includes(nombre.target.value.toLowerCase())){
+        cliente.visible = true;
+      }
+      else{
+        cliente.visible = false;
+      }
+    })
   }
 
 }
