@@ -3,28 +3,27 @@
         <div class="col-sm-8">
             <h4>Precios</h4>
             <ul>
-                <li>Precio semanal</li>
-                <li>Subscripcion Mensual</li>
+                <li *ngFor="let precio of listaPrecios">{{precio.nombre}}</li>
             </ul>
         </div>
         <div class="col-sm-4">
             <h4>Agregar/Editar</h4>
-            <form action="">
+            <form action="" [formGroup]="formularioPrecios">
                 <div class="form-group">
                     <label for="">Nombre</label>
-                    <input type="text" class="form-control">
+                    <input type="text" formControlName="nombre" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Costo</label>
-                    <input type="number" class="form-control">
+                    <input type="number" formControlName="costo" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Duracion</label>
-                    <input type="text" class="form-control">
+                    <input type="text" formControlName="duracion" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Tipo de duracion</label>
-                    <select name="" id="" class="form-control">
+                    <select name="" id="" class="form-control" formControlName="tipoDuracion">
                         <option value="1">Dia</option>
                         <option value="2">Semana</option>
                         <option value="3">Quincena</option>
@@ -33,8 +32,8 @@
                     </select>
                 </div>
 
-                <button class="btn btn-primary">Agregar</button>
-                <button class="btn btn-warning">Editar</button>
+                <button [disabled]="formularioPrecios.invalid" class="btn btn-primary" (click)="agregar()">Agregar</button>
+                <button [disabled]="formularioPrecios.invalid" class="btn btn-warning" (click)="editar()">Editar</button>
             </form>
         </div>
     </div>
