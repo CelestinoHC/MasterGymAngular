@@ -2,10 +2,18 @@
     <div class="row">
         <div class="col-sm-6">
             <app-seleccionar-cliente 
-            [nombre]="clienteSeleccionado.nombre" 
-            (seleccionoCliente)="asignarCliente($event)"
-            (canceloCliente)="eliminarCliente()" >
+                [nombre]="clienteSeleccionado.nombre" 
+                (seleccionoCliente)="asignarCliente($event)"
+                (canceloCliente)="eliminarCliente()" >
             </app-seleccionar-cliente>
+
+            <div class="form-control">
+                <label for="">Precio</label>
+                <select name="" id="" class="form-control">
+                    <option *ngFor="let precio of precios" value="">{{precio.nombre}}</option>
+                </select>
+            </div>
+
             <button class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
         <div class="col-sm-6"></div>
