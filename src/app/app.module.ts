@@ -17,6 +17,7 @@ import { ListadoClientesComponent } from './listado-clientes/listado-clientes.co
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFireStorageModule
   ],
   providers: [
     AngularFireAuth,

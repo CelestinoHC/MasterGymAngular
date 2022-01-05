@@ -54,17 +54,19 @@
 
             <div class="col-sm-12 mt-3">
                 <label for="formFile" class="form-label">Imagen</label>
-                <input class="form-control" type="file" formControlName="imgPath" id="formFile">
-
+                <input class="form-control" type="file" formControlName="imgPath"
+                    id="formFile">
+                <!-- (change)="subirImagen($event)" -->
                 <div *ngIf="formularioCliente.controls['imgPath'].invalid && formularioCliente.controls['imgPath'].dirty"
                     class="alert alert-danger" role="alert">
-                    <span *ngIf="formularioCliente.controls['imgPath'].errors?.required">Fecha de Nacimiento
-                        requerida</span>
+                    <span *ngIf="formularioCliente.controls['imgPath'].errors?.required">Imagen Requerida
+                    </span>
                 </div>
             </div>
 
             <div class="col-sm-12">
-                <progressbar [value]="22" type="success" [striped]="true">22%</progressbar>
+                <progressbar [value]="porcentajeSubida" type="success" [striped]="true">{{porcentajeSubida}}
+                </progressbar>
             </div>
         </div>
 
