@@ -72,7 +72,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.imgPath = this.imgPath;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
 
-    this.db.doc<any>('clientesfe/' + this.id).update(this.formularioCliente.value).then((termino) => {
+    this.db.doc<any>('clientes/' + this.id).update(this.formularioCliente.value).then((termino) => {
       this.msg.mensajeExito('Editado!', 'Se ha editado correctamente');
     }).catch(() => {
       this.msg.mensajeError('Error!', 'Ha sucedido un error');
