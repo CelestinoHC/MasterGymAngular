@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -10,7 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AgregarClienteComponent implements OnInit {
   formularioCliente: FormGroup;
   porcentajeSubida: number = 0;
-  constructor(private fb: FormBuilder, private storage: AngularFireStorage) { }
+  imgPath: string = '';
+  constructor(private fb: FormBuilder, private storage: AngularFireStorage, private db: AngularFirestore) { }
 
   ngOnInit(): void {
     this.formularioCliente = this.fb.group({
@@ -26,29 +28,32 @@ export class AgregarClienteComponent implements OnInit {
   }
 
   agregar() {
-    console.log(this.formularioCliente.value);
+    this.formularioCliente.value.imgPath = this.imgPath;
+    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
+    this.db.collection('clientes').add(this.formularioCliente.value).then((termino) => { })
+    this.formularioCliente.reset();
   }
 
   subirImagen(evento: any) {
-    let nombre = new Date().getTime().toString();
-    let archivo = evento.target.files[0];
-    let extension = archivo.name.toString().substring(archivo.name.toString().lastIndexOf('.'));
-    let ruta = 'clientes/' + nombre + extension;
-    const referencia = this.storage.ref(ruta);
-    const tarea = referencia.put(archivo);
+    if (evento.target.files.length > 0) {
+      let nombre = new Date().getTime().toString();
+      let archivo = evento.target.files[0];
+      let extension = archivo.name.toString().substring(archivo.name.toString().lastIndexOf('.'));
+      let ruta = 'clientes/' + nombre + extension;
+      const referencia = this.storage.ref(ruta);
+      const tarea = referencia.put(archivo);
 
-    tarea.then((objeto)=>{
-      referencia.getDownloadURL().subscribe((url)=>
-      {
-        console.log(url);
+      tarea.then((objeto) => {
+        referencia.getDownloadURL().subscribe((url) => {
+          this.imgPath = url;
+        })
       })
-    })
 
-    tarea.percentageChanges().subscribe((porcentaje) => {
-      if (porcentaje != null)
-        this.porcentajeSubida = parseInt(porcentaje.toString());
-    })
-
+      tarea.percentageChanges().subscribe((porcentaje) => {
+        if (porcentaje != null)
+          this.porcentajeSubida = parseInt(porcentaje.toString());
+      })
+    }
   }
 
 }

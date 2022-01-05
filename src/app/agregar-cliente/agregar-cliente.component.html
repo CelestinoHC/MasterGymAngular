@@ -54,7 +54,7 @@
 
             <div class="col-sm-12 mt-3">
                 <label for="formFile" class="form-label">Imagen</label>
-                <input class="form-control" type="file" formControlName="imgPath"
+                <input (change)="subirImagen($event)" class="form-control" type="file" formControlName="imgPath"
                     id="formFile">
                 <!-- (change)="subirImagen($event)" -->
                 <div *ngIf="formularioCliente.controls['imgPath'].invalid && formularioCliente.controls['imgPath'].dirty"
