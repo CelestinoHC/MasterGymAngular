@@ -3,7 +3,7 @@
         <div class="col-sm-8">
             <h4>Precios</h4>
             <ul>
-                <li *ngFor="let precio of listaPrecios">{{precio.nombre}}</li>
+                <li *ngFor="let precio of listaPrecios" (click)="editarPrecio(precio)">{{precio.nombre}}</li>
             </ul>
         </div>
         <div class="col-sm-4">
@@ -32,8 +32,8 @@
                     </select>
                 </div>
 
-                <button [disabled]="formularioPrecios.invalid" class="btn btn-primary" (click)="agregar()">Agregar</button>
-                <button [disabled]="formularioPrecios.invalid" class="btn btn-warning" (click)="editar()">Editar</button>
+                <button *ngIf="!esEditar" [disabled]="formularioPrecios.invalid" class="btn btn-primary" (click)="agregar()">Agregar</button>
+                <button *ngIf="esEditar" [disabled]="formularioPrecios.invalid" class="btn btn-warning" (click)="editar()">Editar</button>
             </form>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Precio } from '../models/precio';
 import { MensajesService } from '../services/mensajes.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { MensajesService } from '../services/mensajes.service';
 })
 export class PreciosComponent implements OnInit {
   formularioPrecios: FormGroup;
-  listaPrecios: any[] = new Array<any>();
+  listaPrecios: Precio[] = new Array<Precio>();
+  esEditar: boolean = false;
+  id: string;
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private db: AngularFirestore,
     private msg: MensajesService) { }
 
@@ -24,10 +27,14 @@ export class PreciosComponent implements OnInit {
       tipoDuracion: ['', Validators.required]
     })
 
-    this.db.collection('precios').get().subscribe((resultado)=>{
-      resultado.docs.forEach((dato)=>
-      {
-        let precio: any = dato.data();
+    this.mostrarPrecio();
+  }
+
+  mostrarPrecio(){
+    this.db.collection('precios').get().subscribe((resultado) => {
+      this.listaPrecios.length = 0;
+      resultado.docs.forEach((dato) => {
+        let precio: any = dato.data() as Precio;
         precio.id = dato.id;
         precio.ref = dato.ref;
         this.listaPrecios.push(precio);
@@ -35,17 +42,36 @@ export class PreciosComponent implements OnInit {
     })
   }
 
-  agregar(){
-    this.db.collection('precios').add(this.formularioPrecios.value).then(()=>{
+  agregar() {
+    this.db.collection('precios').add(this.formularioPrecios.value).then(() => {
       this.msg.mensajeExito('Agregado!', 'Se agrego corractamente');
       this.formularioPrecios.reset();
-    }).catch(()=>{
+      this.mostrarPrecio();
+    }).catch(() => {
       this.msg.mensajeError('Error!', 'Ha ocurrido un error')
     })
   }
 
-  editar(){
+  editarPrecio(precio: Precio) {
+    this.esEditar = true;
+    this.formularioPrecios.setValue({
+      nombre: precio.nombre,
+      costo: precio.costo,
+      duracion: precio.duracion,
+      tipoDuracion: precio.tipoDuracion
+    })
+    this.id = precio.id;
+  }
 
+  editar() {
+    this.db.doc('precios/' + this.id).update(this.formularioPrecios.value).then(() => {
+      this.msg.mensajeExito('Editado!', 'Editado con exito');
+      this.formularioPrecios.reset();
+      this.esEditar = false;
+      this.mostrarPrecio();
+    }).catch(() => {
+      this.msg.mensajeError('Error!', 'Ha ocurrido un error')
+    })
   }
 
 }
