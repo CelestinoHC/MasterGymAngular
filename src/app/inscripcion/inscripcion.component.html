@@ -9,8 +9,9 @@
 
             <div class="form-control">
                 <label for="">Precio</label>
-                <select name="" id="" class="form-control">
-                    <option *ngFor="let precio of precios" value="">{{precio.nombre}}</option>
+                <select name="" id="" (change)="seleccionoPrecio($event)" class="form-control">
+                    <option value="null">Seleccione un precio</option>
+                    <option *ngFor="let precio of precios" [value]="precio.id">{{precio.nombre}}</option>
                 </select>
             </div>
 

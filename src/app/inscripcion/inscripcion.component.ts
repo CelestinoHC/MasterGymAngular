@@ -12,6 +12,7 @@ import { Precio } from '../models/precio';
 export class InscripcionComponent implements OnInit {
   inscripcion: Inscripcion = new Inscripcion();
   clienteSeleccionado: Cliente = new Cliente();
+  precioSeleccionado: Precio = new Precio();
   precios: Precio[] = new Array<Precio>();
   constructor(private db: AngularFirestore) { }
 
@@ -38,6 +39,11 @@ export class InscripcionComponent implements OnInit {
   }
 
   guardar(){
+    console.log(this.inscripcion);
+  }
 
+  seleccionoPrecio(event:any){
+    this.precioSeleccionado = this.precios.find(x=> x.id == event.target.value);
+    this.inscripcion.tipoInscripcion = this.precioSeleccionado.ref;    
   }
 }
