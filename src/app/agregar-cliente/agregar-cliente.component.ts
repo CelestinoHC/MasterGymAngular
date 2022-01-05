@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'
+import { MensajesService } from '../services/mensajes.service';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -20,7 +22,8 @@ export class AgregarClienteComponent implements OnInit {
     private fb: FormBuilder,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute,
+    private msg: MensajesService) { }
 
   ngOnInit(): void {
     this.formularioCliente = this.fb.group({
@@ -56,15 +59,24 @@ export class AgregarClienteComponent implements OnInit {
   agregar() {
     this.formularioCliente.value.imgPath = this.imgPath;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
-    this.db.collection('clientes').add(this.formularioCliente.value).then((termino) => { })
+    this.db.collection('clientes').add(this.formularioCliente.value).then((termino) => {
+      this.msg.mensajeExito('Agregado!', 'Se ha agregado correctamente');
+    }).catch(() => {
+      this.msg.mensajeError('Error!', 'Ha sucedido un error');
+    })
     this.formularioCliente.reset();
+    this.porcentajeSubida = 0;
   }
 
   editar() {
     this.formularioCliente.value.imgPath = this.imgPath;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
 
-    this.db.doc<any>('clientes/' + this.id).update(this.formularioCliente.value);
+    this.db.doc<any>('clientesfe/' + this.id).update(this.formularioCliente.value).then((termino) => {
+      this.msg.mensajeExito('Editado!', 'Se ha editado correctamente');
+    }).catch(() => {
+      this.msg.mensajeError('Error!', 'Ha sucedido un error');
+    });
   }
 
   subirImagen(evento: any) {
