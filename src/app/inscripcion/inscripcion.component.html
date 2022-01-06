@@ -15,6 +15,16 @@
                 </select>
             </div>
 
+            <div class="form-control">
+                <label for="">Fecha de inicio</label>
+                <input type="text" [value]="inscripcion.fecha | date" disabled class="form-control">
+            </div>
+            
+            <div class="form-control">
+                <label for="">Fecha de finalizacion</label>
+                <input type="text" [value]="inscripcion.fechaFinal | date" disabled class="form-control">
+            </div>
+
             <button class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
         <div class="col-sm-6"></div>
