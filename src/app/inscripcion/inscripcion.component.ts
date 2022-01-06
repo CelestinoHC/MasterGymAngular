@@ -39,47 +39,64 @@ export class InscripcionComponent implements OnInit {
   }
 
   guardar() {
-    console.log(this.inscripcion);
+    if (this.inscripcion.validar().esValido == true){
+      console.log('Guardado');
+    }
+    else{      
+      console.log(this.inscripcion.validar().mensaje);
+    }
   }
 
   seleccionoPrecio(event: any) {
-    this.precioSeleccionado = this.precios.find(x => x.id == event.target.value);
-    this.inscripcion.tipoInscripcion = this.precioSeleccionado.ref;
+    if (event.target.value != "null") {
+      this.precioSeleccionado = this.precios.find(x => x.id == event.target.value);
+      this.inscripcion.tipoInscripcion = this.precioSeleccionado.ref;
 
-    this.inscripcion.subTotal = this.precioSeleccionado.costo;
-    this.inscripcion.iva = this.inscripcion.subTotal * 0.16;
-    this.inscripcion.total = this.inscripcion.subTotal + this.inscripcion.iva;
+      this.inscripcion.subTotal = this.precioSeleccionado.costo;
+      this.inscripcion.iva = this.inscripcion.subTotal * 0.16;
+      this.inscripcion.total = this.inscripcion.subTotal + this.inscripcion.iva;
 
-    this.inscripcion.fecha = new Date();
+      this.inscripcion.fecha = new Date();
 
-    if (this.precioSeleccionado.tipoDuracion == 1) {
-      let dias: number = this.precioSeleccionado.duracion * 1;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
-      this.inscripcion.fechaFinal = fechaFinal;
+      if (this.precioSeleccionado.tipoDuracion == 1) {
+        let dias: number = this.precioSeleccionado.duracion * 1;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+      if (this.precioSeleccionado.tipoDuracion == 2) {
+        let dias: number = this.precioSeleccionado.duracion * 7;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+      if (this.precioSeleccionado.tipoDuracion == 3) {
+        let dias: number = this.precioSeleccionado.duracion * 15;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+      if (this.precioSeleccionado.tipoDuracion == 4) {
+        let anio: number = this.inscripcion.fecha.getFullYear();
+        let meses: number = Number(this.precioSeleccionado.duracion) + Number(this.inscripcion.fecha.getMonth());
+        let dia: number = this.inscripcion.fecha.getDate()
+        let fechaFinal = new Date(anio, meses, dia);
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+      if (this.precioSeleccionado.tipoDuracion == 5) {
+        let anio: number = Number(this.inscripcion.fecha.getFullYear()) + Number(this.precioSeleccionado.duracion);
+        let meses: number = this.inscripcion.fecha.getMonth();
+        let dia: number = this.inscripcion.fecha.getDate()
+        let fechaFinal = new Date(anio, meses, dia);
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
     }
-    if (this.precioSeleccionado.tipoDuracion == 2) {
-      let dias: number = this.precioSeleccionado.duracion * 7;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-    if (this.precioSeleccionado.tipoDuracion == 3) {
-      let dias: number = this.precioSeleccionado.duracion * 15;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-    if (this.precioSeleccionado.tipoDuracion == 4) {
-      let anio: number = this.inscripcion.fecha.getFullYear();
-      let meses: number = Number(this.precioSeleccionado.duracion) + Number(this.inscripcion.fecha.getMonth());
-      let dia: number = this.inscripcion.fecha.getDate()
-      let fechaFinal = new Date(anio, meses, dia);
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-    if (this.precioSeleccionado.tipoDuracion == 5) {
-      let anio: number = Number(this.inscripcion.fecha.getFullYear()) + Number(this.precioSeleccionado.duracion);
-      let meses: number = this.inscripcion.fecha.getMonth();
-      let dia: number = this.inscripcion.fecha.getDate()
-      let fechaFinal = new Date(anio, meses, dia);
-      this.inscripcion.fechaFinal = fechaFinal;
+    else {
+      this.precioSeleccionado = new Precio();
+
+      this.inscripcion.fecha = null;
+      this.inscripcion.fechaFinal = null;
+      this.inscripcion.tipoInscripcion = null;
+      this.inscripcion.subTotal = 0;
+      this.inscripcion.iva = 0;
+      this.inscripcion.total = 0;
     }
   }
 }
