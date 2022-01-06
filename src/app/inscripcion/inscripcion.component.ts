@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Cliente } from '../models/cliente';
 import { Inscripcion } from '../models/inscripcion';
 import { Precio } from '../models/precio';
+import { MensajesService } from '../services/mensajes.service';
 
 @Component({
   selector: 'app-inscripcion',
@@ -13,8 +14,9 @@ export class InscripcionComponent implements OnInit {
   inscripcion: Inscripcion = new Inscripcion();
   clienteSeleccionado: Cliente = new Cliente();
   precioSeleccionado: Precio = new Precio();
+  idPrecio: string = 'null';
   precios: Precio[] = new Array<Precio>();
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private msg: MensajesService) { }
 
   ngOnInit(): void {
     this.db.collection('precios').get().subscribe((resultado) => {
@@ -39,11 +41,28 @@ export class InscripcionComponent implements OnInit {
   }
 
   guardar() {
-    if (this.inscripcion.validar().esValido == true){
-      console.log('Guardado');
+    if (this.inscripcion.validar().esValido == true) {
+      let inscripcionAgregada = {
+        fecha: this.inscripcion.fecha,
+        fechaFinal: this.inscripcion.fechaFinal,
+        cliente: this.inscripcion.cliente,
+        tipoInscripcion: this.inscripcion.tipoInscripcion,
+        subTotal: this.inscripcion.subTotal,
+        iva: this.inscripcion.iva,
+        total: this.inscripcion.total
+      }
+      this.db.collection('inscripciones').add(inscripcionAgregada).then(() => {
+        this.inscripcion = new Inscripcion();
+        this.clienteSeleccionado = new Cliente();
+        this.precioSeleccionado = new Precio();
+        this.idPrecio = 'null';
+        this.msg.mensajeExito('Exito!', 'La inscripcion de ha guardado correctamente')
+      }).catch(() => {
+        this.msg.mensajeError('Error!', 'Ha sucedido un error!')
+      })
     }
-    else{      
-      console.log(this.inscripcion.validar().mensaje);
+    else {
+      this.msg.mensajeAdvertencia('Advertencia!', this.inscripcion.validar().mensaje)
     }
   }
 
