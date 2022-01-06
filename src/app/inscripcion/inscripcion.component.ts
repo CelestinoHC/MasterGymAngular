@@ -46,6 +46,10 @@ export class InscripcionComponent implements OnInit {
     this.precioSeleccionado = this.precios.find(x => x.id == event.target.value);
     this.inscripcion.tipoInscripcion = this.precioSeleccionado.ref;
 
+    this.inscripcion.subTotal = this.precioSeleccionado.costo;
+    this.inscripcion.iva = this.inscripcion.subTotal * 0.16;
+    this.inscripcion.total = this.inscripcion.subTotal + this.inscripcion.iva;
+
     this.inscripcion.fecha = new Date();
 
     if (this.precioSeleccionado.tipoDuracion == 1) {

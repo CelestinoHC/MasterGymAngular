@@ -24,9 +24,28 @@
                 <label for="">Fecha de finalizacion</label>
                 <input type="text" [value]="inscripcion.fechaFinal | date" disabled class="form-control">
             </div>
+            
+            <div class="form-control">
+                <label for="">SubTotal</label>
+                <input type="text" [value]="inscripcion.subTotal | number" disabled class="form-control">
+            </div>
+            
+            <div class="form-control">
+                <label for="">IVA</label>
+                <input type="text" [value]="inscripcion.iva | number" disabled class="form-control">
+            </div>
+            
+            <div class="form-control">
+                <label for="">Total</label>
+                <input type="text" [value]="inscripcion.total | number" disabled class="form-control">
+            </div>
 
             <button class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
-        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <div *ngIf="clienteSeleccionado.imgPath" class="img-cliente">
+                <img [src]="clienteSeleccionado.imgPath" alt="">
+            </div>
+        </div>
     </div>
 </div>
